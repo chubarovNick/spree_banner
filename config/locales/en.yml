@@ -16,6 +16,7 @@ en:
   enabled: Enabled?
   url: Link url
   attachment: Attachment
+  thumbnail: Thumbnail
   category: Category
   banner_boxes: Banners
   banner_box: Banner
