@@ -1,6 +1,6 @@
 module Spree
   class BannerBox < ActiveRecord::Base
-    
+
     has_attached_file :attachment,
                 :convert_options => { :all => '-strip -auto-orient' }
     # save the w,h of the original image (from which others can be calculated)
@@ -19,16 +19,13 @@ module Spree
       end
     }
 
-    # Load user defined paperclip settings
-    include Spree::Core::S3Support
-    supports_s3 :attachment
-    
+
     Spree::BannerBox.attachment_definitions[:attachment][:styles] = ActiveSupport::JSON.decode(SpreeBanner::Config[:banner_styles]).symbolize_keys!
     Spree::BannerBox.attachment_definitions[:attachment][:path] = SpreeBanner::Config[:banner_path]
     Spree::BannerBox.attachment_definitions[:attachment][:url] = SpreeBanner::Config[:banner_url]
     Spree::BannerBox.attachment_definitions[:attachment][:default_url] = SpreeBanner::Config[:banner_default_url]
     Spree::BannerBox.attachment_definitions[:attachment][:default_style] = SpreeBanner::Config[:banner_default_style]
-    
+
     # for adding banner_boxes which are closely related to existing ones
     # define "duplicate_extra" for site-specific actions, eg for additional fields
     def duplicate
